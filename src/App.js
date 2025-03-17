@@ -103,29 +103,28 @@ function App() {
   }
 
   const handleClick = async (id) => {
-    const listItems = items.filter((item) => (item.id != id));
-    setItems(listItems);
-
-
+    const reqUrl = `${API_URL}/${id}`;
+  
     const deleteOptions = {
       method: 'DELETE',
     };
-
-    const reqUrl = `${API_URL}/${id}`; // Ensure API_URL and id are defined
-    
+  
     try {
-      const result = await apiRequest(reqUrl, deleteOptions); // Assuming apiRequest returns error or null
-      if (result) {
-        setFetchError(result); // Update error state
+      const result = await apiRequest(reqUrl, deleteOptions);
+  
+      if (!result) {
+        // Update UI only after successful deletion
+        setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+        setFetchError(null);
       } else {
-        setFetchError(null); // Clear error state on success
+        setFetchError(result);
       }
     } catch (error) {
       console.error('Error making the API request:', error);
       setFetchError(error.message || 'An unexpected error occurred.');
-    }    
-
-  }
+    }
+  };
+  
 
   const handleSubmit=(e)=>{
     e.preventDefault()
