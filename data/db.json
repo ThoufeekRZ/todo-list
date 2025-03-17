@@ -1,0 +1,19 @@
+{
+  "items": [
+    {
+      "id": "2",
+      "checked": true,
+      "content": "maths"
+    },
+    {
+      "id": "3",
+      "checked": false,
+      "content": "science"
+    },
+    {
+      "id": "311",
+      "checked": false,
+      "content": "science"
+    }
+  ]
+}
